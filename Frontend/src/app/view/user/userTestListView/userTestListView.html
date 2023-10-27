@@ -1,0 +1,33 @@
+<div class="container mt-4">
+  <div class="row text-center pt-4">
+    <h4 class="titleUnderLine">TEST</h4>
+  </div>
+  <div class="row mt-5 mb-5">
+      <div class="col-3 mt-4" *ngFor="let test of testList">
+        <div class="setCard" *ngIf="test.level <= user.level" (click)="showTest(test)">
+          <div class="setCard-title text-secondary">
+            <h5>{{test.topic}}</h5>
+          </div>
+          <div class="setCard-body p-4 text-center" style="height: 100px">
+              <h3>{{test.name}}</h3>
+          </div>
+          <div class="setCard-footer text-secondary text-end">
+            <h6>{{test.createTime}}</h6>
+          </div>
+        </div>
+
+        <div class="lockedCard lockedSet" *ngIf="test.level > user.level">
+          <div class="lockedCard-title text-secondary">
+            <h5>{{test.topic}}</h5>
+          </div>
+          <div class="lockedCard-body p-4 text-center" style="height: 100px">
+            <h3>{{test.name}}</h3>
+            <div class="lockedText"><i class="bi bi-lock"></i></div>
+          </div>
+          <div class="lockedCard-footer text-secondary text-end">
+            <h6>{{test.createTime}}</h6>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

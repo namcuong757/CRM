@@ -1,0 +1,27 @@
+<div class="modal-content container mt-5" style="width: 600px">
+  <h2 style="text-align:center;margin:20px 0 5px;">My Account</h2>
+
+  <div class="row mt-2">
+    <div class="col-6">
+      <label><b>User Name</b></label>
+      <input type="text" name="userName" id="userName" value="{{user.userName}}" readonly>
+    </div>
+    <div class="col-6">
+      <label><b>Account Type</b></label>
+      <input type="text" name="role" id="role" value="{{user.role}}" readonly>
+    </div>
+  </div>
+
+  <label><b>Email Id</b></label>
+  <input type="text" name="emailId" id="emailId" placeholder="Email ID" value="{{user.emailId}}" required>
+
+  <label><b>Phone Number</b></label>
+  <input type="text" name="phone"   id="phone"   placeholder="Phone Number"  value="{{user.phone}}" required>
+
+  <div class="row justify-content-end">
+    <div class="col-3">
+      <button type="button" (click)="update()">Update</button>
+    </div>
+  </div>
+
+</div>

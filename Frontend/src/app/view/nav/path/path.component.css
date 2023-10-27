@@ -1,0 +1,29 @@
+div.banner_main_heading{background:#095099 !important;}
+
+.breadcrumbs-wrapper breadcrumbs a {
+  color: #666666;
+}
+.breadcrumbs-wrapper breadcrumbs a:hover {
+  color: #ffb606;
+}
+.breadcrumbs-wrapper .woocommerce-breadcrumb, .breadcrumbs-wrapper .thim-breadcrumbs {
+  color: #666666;
+}
+.breadcrumbs-wrapper .woocommerce-breadcrumb a, .breadcrumbs-wrapper .thim-breadcrumbs a {
+  color: #666666;
+}
+.breadcrumbs-wrapper .woocommerce-breadcrumb a:hover, .breadcrumbs-wrapper .thim-breadcrumbs a:hover {
+  color: #ffb606;
+}
+.breadcrumbs-wrapper.button-list-gird .display .switcher-active i, .breadcrumbs-wrapper.button-list-gird .display a:hover i {
+  color: #ffb606;
+}
+.breadcrumbs-wrapper #breadcrumbs li {
+  color: #666666;
+}
+.breadcrumbs-wrapper #breadcrumbs li a {
+  color: #666666;
+}
+.breadcrumbs-wrapper #breadcrumbs li a:hover {
+  color: #ffb606;
+}

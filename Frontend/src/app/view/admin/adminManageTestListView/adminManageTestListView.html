@@ -1,0 +1,132 @@
+<div class="container">
+  <div class="row" *ngIf="showAddTestView == false && showDeleteConfirmView == false && showNewTestView == false && showMessageView == false">
+    <div class="col-8">
+      <div class=" card bg-secondary-subtle mt-2" style="width: 850px; height: 73px">
+        <div class="row mt-1 ms-0 me-0" style="height: 32px;">
+          <div class="h5 col-1 text-center">id</div>
+          <div class="h5 col-4 text-center">Test Name</div>
+          <div class="h5 col-4 text-center">Topic</div>
+          <div class="h5 col-2 text-center">Level</div>
+          <div class="h5 col-1 text-center"><button class="btn btn-sm btn-primary px-0 mt-0" (click)="showAddTest()">+</button></div>
+        </div>
+        <div class="row mt-0 ms-0 me-0" style="height: 32px;">
+          <div class="col-1"><input class="form-control mt-0 mb-1 pe-0" style="width:60px;height: 32px;" type="number" id="fitlerId"    value="{{filterTest.id   }}"></div>
+          <div class="col-4"><input class="form-control mt-0 mb-1" style="height: 32px;" type="text"   id="fitlerName"  value="{{filterTest.name }}"></div>
+          <div class="col-4"><input class="form-control mt-0 mb-1" style="height: 32px;" type="text"   id="fitlerTopic" value="{{filterTest.topic}}"></div>
+          <div class="col-2"><input class="form-control mt-0 mb-1" style="height: 32px;" type="number" id="fitlerLevel" value="{{filterTest.level}}"></div>
+          <div class="col-1"><button class="btn btn-sm btn-primary px-0 mt-0" (click)="filter()">Filter</button></div>
+        </div>
+      </div>
+      <div class=" card mt-2" style="width: 850px; height: 440px; overflow: auto">
+        <div class="row border-bottom" style="height: 32px;" *ngFor="let test of currentTestList">
+          <div class="col-1 text-center">{{test.id}}</div>
+          <div class="col-4 text-center">{{test.name}}</div>
+          <div class="col-4 text-center">{{test.topic}}</div>
+          <div class="col-2 text-center">{{test.level}}</div>
+          <div class="col-1 text-center"><button class="btn btn-sm btn-outline-primary px-0 mt-0" (click)="showTestDetail(test)">-></button></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="modal-content container mt-3" style="width: 400px;height:360px" *ngIf="currentTest.id > 0">
+        <label><b>Topic</b></label>
+        <input type="text"  id="topic" list="topiclist" value="{{currentTest.topic}}" required>
+        <datalist id="topiclist">
+          <option *ngFor="let topic of topicList">{{topic.topic}}</option>
+        </datalist>
+        <label><b>Test Name</b></label>
+        <input type="text"  id="name"  value="{{currentTest.name}}" required>
+        <label><b>Level</b></label>
+        <input type="text"  id="level" value="{{currentTest.level}}" required>
+        <div class="row justify-content-end">
+          <div class="col-4">
+            <button type="button" style="background-color: #C44336" (click)="showDeleteConfirm()">Delete</button>
+          </div>
+          <div class="col-4">
+            <button type="button" (click)="updateTest()">Update</button>
+          </div>
+          <div class="col-4">
+            <button type="button" style="background-color: #095099" (click)="testView()">View</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-content container mt-3 text-center" style="width: 400px;height:360px" *ngIf="currentTest.id <= 0">
+        <h1 class="text-secondary mt-5">No Data</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showAddTestView == true && showMessageView == false">
+    <div class="modal-content animate container mt-2" style="width: 600px">
+      <div class="row">
+        <div class="col-2 text-center">
+          <button (click)="closeAddTest()">Back</button>
+        </div>
+        <div class="col-8 text-center">
+          <h2 style="text-align:center;margin:20px 0 5px;">Add New Test</h2>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <label><b>Topic</b></label>
+        <input id="newTopic" type="text" list="newTopiclist" value="{{newTest.topic}}" required>
+        <datalist id="newTopiclist">
+          <option *ngFor="let topic of topicList">{{topic.topic}}</option>
+        </datalist>
+
+        <label><b>Test Name</b></label>
+        <input type="text"  id="newName"  value="{{newTest.name}}" required>
+        <label><b>Level</b></label>
+        <input type="number" id="newLevel" value="{{newTest.level}}" required>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button type="button" (click)="addNewTest()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showDeleteConfirmView == true">
+    <div class="modal-content animate container mt-2" style="width: 600px">
+      <div class="row text-center m-4">
+        <label class="h3"><b>Are You Sure To Delete This Test?</b></label>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <button type="button" style="background-color: #C44336" (click)="deleteTest()">Yes</button>
+        </div>
+        <div class="col-6">
+          <button type="button" (click)="closeDeleteConfirm()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showNewTestView == true">
+    <div class="modal-content animate container mt-2" style="width: 600px">
+      <div class="row text-center m-4">
+        <label class="h3"><b>Create Test Successful</b></label>
+        <label class="h3"><b>Do You Want to Add Question to This Test?</b></label>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <button type="button" (click)="testView()">Yes</button>
+        </div>
+        <div class="col-6">
+          <button type="button" style="background-color: #C44336" (click)="closeNewTestView()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message View -->
+  <div *ngIf="showMessageView == true">
+    <app-jump-page [message] = 'message' [error] = 'error'></app-jump-page>
+  </div>
+
+
+
+
+</div>

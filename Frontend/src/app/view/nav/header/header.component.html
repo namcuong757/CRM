@@ -1,0 +1,22 @@
+<header>
+  <div class="row navbar text-end menuMarginEnd border-bottom border-secondary-subtle">
+    <div class="col-12 justify-content-end menuMarginTop">
+      <a href="{{user.role + '/myAccount'}}">{{user.userName}}</a><span class="separator">|</span>
+      <a href="{{user.role + '/resetPassword'}}">Change Password</a>
+      <a class="login" (click)="logout()"> Logout</a>
+    </div>
+  </div>
+  <div class="row logoRow">
+    <div class="col-sm-6">
+      <a class="logoMarginLeft" href="{{user.role + '/dashboard'}}">
+        <img class="logoMarginTop" width="155" height="65" src="/assets/image/logo.png">
+      </a>
+    </div>
+    <div class="col-sm-6 text-end">
+      <h6 class="textMarginTop textMarginRight">{{location}}</h6>
+    </div>
+  </div>
+</header>
+<app-path [path] = "path">
+
+</app-path>

@@ -1,0 +1,90 @@
+<div class="container">
+
+  <div class="row" *ngIf="showAddTopicView == false && showDeleteConfirmView == false && showMessageView == false">
+    <div class="col-8">
+      <div class=" card container mt-2" style="width: 800px; height: 440px; overflow: auto">
+        <div class="row bg-secondary-subtle" style="height: 32px;">
+          <div class="h5 col-1 text-center">id</div>
+          <div class="h5 col-4 text-center">Topic</div>
+          <div class="h5 col-3 text-center">Create Time</div>
+          <div class="h5 col-3 text-center">Update Time</div>
+          <div class="h5 col-1 text-center"><button class="btn btn-sm btn-primary px-0 mt-0" (click)="showAddTopic()">+</button></div>
+        </div>
+        <div class="row border-bottom" style="height: 32px;" *ngFor="let topic of topicList">
+          <div class="col-1 text-center">{{topic.id}}</div>
+          <div class="col-4 text-center">{{topic.topic}}</div>
+          <div class="col-3 text-center">{{topic.createTime}}</div>
+          <div class="col-3 text-center">{{topic.updateTime}}</div>
+          <div class="col-1 text-center"><button class="btn btn-sm btn-outline-primary px-0 mt-0" (click)="showTopicDetail(topic)">-></button></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="modal-content container mt-5" style="width: 400px;min-height:300px" *ngIf="currentTopic.id > 0">
+        <label><b>Topic</b></label>
+        <input type="text"  id="topic" value="{{currentTopic.topic}}" required>
+        <label><b>Description</b></label>
+        <textarea id="description">{{currentTopic.description}}</textarea>
+        <div class="row justify-content-end">
+          <div class="col-6">
+            <button type="button" style="background-color: #C44336" (click)="showDeleteConfirm()">Delete</button>
+          </div>
+          <div class="col-6">
+            <button type="button" (click)="updateTopic()">Update</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-content container mt-5 text-center" style="width: 400px;height:300px" *ngIf="currentTopic.id <= 0">
+        <h1 class="text-secondary mt-5">No Data</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showAddTopicView == true && showMessageView == false">
+    <div class="modal-content animate container mt-2" style="width: 600px">
+      <div class="row">
+        <div class="col-2 text-center">
+          <button (click)="closeAddTopic()">Back</button>
+        </div>
+        <div class="col-8 text-center">
+          <h2 style="text-align:center;margin:20px 0 5px;">Add New Topic</h2>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <label><b>Topic</b></label>
+        <input type="text" id="newTopic" value="" required>
+
+        <label><b>Description</b></label>
+        <textarea id="newDescription" style="height:120px;"></textarea>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button type="button" (click)="addNewTopic()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showDeleteConfirmView == true">
+    <div class="modal-content container mt-2" style="width: 600px">
+      <div class="row text-center m-4">
+        <label class="h3"><b>Are You Sure To Delete This Topic?</b></label>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <button type="button" style="background-color: #C44336" (click)="deleteTopic()">Yes</button>
+        </div>
+        <div class="col-6">
+          <button type="button" (click)="closeDeleteConfirm()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message View -->
+  <div *ngIf="showMessageView == true">
+    <app-jump-page [message] = 'message' [error] = 'error'></app-jump-page>
+  </div>
+
+</div>

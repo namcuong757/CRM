@@ -1,0 +1,12 @@
+<div *ngIf="user.id > 0">
+  <app-header [user] = 'user'></app-header>
+  <div style="min-height: 600px">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+<div *ngIf="user.id < 0">
+  <app-log-in></app-log-in>
+</div>
+

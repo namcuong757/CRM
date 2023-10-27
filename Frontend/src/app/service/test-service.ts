@@ -1,0 +1,56 @@
+import {Injectable} from "@angular/core";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {observable, Observable} from "rxjs";
+import { Account } from "../model/Account";
+import { Test } from "../model/Test";
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TestService
+{
+  constructor(private httpClient:HttpClient)
+  { }
+
+  getAllTest():Observable<Test[]>
+  {
+    return this.httpClient.get<Test[]>('http://localhost:8080/api/v1/admin/getAllTest');
+  }
+
+  getTestById(id:number):Observable<Test>
+  {
+    return this.httpClient.get<Test>('http://localhost:8080/api/v1/admin/getTestById/' + id);
+  }
+
+  addNewTest(test:Test):Observable<Test>
+  {
+    const httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    const info = {
+      topic: test.topic,
+      name : test.name,
+      level: test.level
+    }
+    // @ts-ignore
+    return this.httpClient.post<Test>('http://localhost:8080/api/v1/admin/addNewTest', JSON.stringify(info), {headers: httpHeaders});
+  }
+
+  deleteTest(id:number):Observable<string>
+  {
+    // @ts-ignore
+    return this.httpClient.delete<string>('http://localhost:8080/api/v1/admin/deleteTestById/' + id, {responseType: 'text'});
+  }
+
+  updateTest(test:Test):Observable<string>
+  {
+    const httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    const info = {
+      id   : test.id,
+      topic: test.topic,
+      name : test.name,
+      level: test.level
+    }
+    // @ts-ignore
+    return this.httpClient.put<string>('http://localhost:8080/api/v1/admin/uptateTest/' + test.id, JSON.stringify(info), {headers: httpHeaders, responseType: 'text'});
+  }
+}

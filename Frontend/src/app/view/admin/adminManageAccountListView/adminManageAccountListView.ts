@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Account} from "../../../model/Account";
 import {AccountService} from "../../../service/account-service";
-import _default from "chart.js/dist/plugins/plugin.tooltip";
-import numbers = _default.defaults.animations.numbers;
+//import _default from "chart.js/dist/plugins/plugin.tooltip";
+//import numbers = _default.defaults.animations.numbers;
 
 @Component({
   selector: 'app-admin-manage-account-list-view',
